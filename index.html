@@ -84,13 +84,15 @@
     </div>
 
     <script>
+        console.log("JavaScript завантажено!");
+
         document.addEventListener("DOMContentLoaded", function () {
             const noBtn = document.getElementById('no');
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
             const glow = document.querySelector('.glow');
 
-            if (!noBtn || !yesBtn || !message || !glow) {
+            if (!noBtn || !yesBt || !message || !glow) {
                 console.error("Один із елементів не знайдено!");
                 return;
             }
@@ -105,18 +107,18 @@
                 noBtn.style.top = y + "px";
             });
 
-            // Відображення повідомлення
-            yesBtn.addEventListener('click', () => {
+            // Відображення повідомлення (альтернативний метод)
+            yesBtn.onclick = function() {
                 console.log("Натиснута кнопка 'Так'");
                 glow.style.opacity = "1";
                 message.classList.remove('hidden');
                 setTimeout(() => message.style.opacity = "1", 500);
 
-                // Вібрація (працює тільки на мобільних)
+                // Вібрація (тільки для мобільних)
                 if (navigator.vibrate) {
                     navigator.vibrate([500, 300, 500]);
                 }
-            });
+            };
         });
     </script>
 </body>
