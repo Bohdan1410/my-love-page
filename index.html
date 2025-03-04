@@ -15,11 +15,18 @@
         }
 
         .glow {
-            background: radial-gradient(circle, rgba(255,77,109,0.8) 10%, rgba(34,34,34,1) 70%);
+            position: fixed;
+            width:100vw;
+            height:100vh;
+            top:0;
+            left:0;
+            background: radial-gradient(circle, rgba(255,150,100,0.3) 10%, rgba(0, 0, 0, 0) 80%);
+            opacity:0;
+            transition:opacity 1;
         }
 
         .container {
-            margin-top: 20vh;
+            margin-top: 15vh;
         }
 
         h1 {
@@ -59,7 +66,7 @@
         }
 
         .message {
-            font-size: 22px;
+            font-size: 25px;
             font-weight: bold;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
@@ -81,7 +88,7 @@
             max-width: 400px;
             margin-top: 20px;
             border-radius: 10px;
-            horizontal-align: middle;
+            margin-left:50px;
         }
     </style>
 </head>
@@ -106,7 +113,7 @@
     <img src="https://i.pinimg.com/originals/42/9a/89/429a890a39e70d522d52c7e52bce8535.gif" class="gif" style="top: 10%; left: 5%;">
     <img src="https://media.giphy.com/media/5xaOcLVlzXjj9K6G9m/giphy.gif" class="gif" style="top: 50%; left: 40%;">
     <img src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif" class="gif" style="top: 70%; left: 60%;">
-    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Ftenabanana%2Fcute-gifs%2F&psig=AOvVaw38jTrLnQ6xP8WBcSwYiQGH&ust=1741201357026000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIiM1dSO8YsDFQAAAAAdAAAAABAE" class="gif" style="top: 30%; left: 80%;">
+    <img src="https://media.tenor.com/C7VyBNOxLsoAAAAM/love-you-love.gif" class="gif" style="top: 30%; left: 80%;">
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
