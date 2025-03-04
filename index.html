@@ -84,29 +84,39 @@
     </div>
 
     <script>
-        const noBtn = document.getElementById('no');
-        const yesBtn = document.getElementById('yes');
-        const message = document.querySelector('.message');
-        const glow = document.querySelector('.glow');
+        document.addEventListener("DOMContentLoaded", function () {
+            const noBtn = document.getElementById('no');
+            const yesBtn = document.getElementById('yes');
+            const message = document.querySelector('.message');
+            const glow = document.querySelector('.glow');
 
-        // Функція для втечі кнопки "Ні"
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
-        });
-
-        // Функція для показу повідомлення
-        yesBtn.addEventListener('click', () => {
-            glow.style.opacity = "1";
-            message.classList.remove('hidden');
-            setTimeout(() => message.style.opacity = "1", 500);
-
-            // Вібрація (тільки на мобільних пристроях)
-            if (navigator.vibrate) {
-                navigator.vibrate([500, 300, 500]); // Вібрація двічі
+            if (!noBtn || !yesBtn || !message || !glow) {
+                console.error("Один із елементів не знайдено!");
+                return;
             }
+
+            console.log("Кнопки завантажені коректно.");
+
+            // Переміщення кнопки "Ні"
+            noBtn.addEventListener('mouseover', () => {
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
+            });
+
+            // Відображення повідомлення
+            yesBtn.addEventListener('click', () => {
+                console.log("Натиснута кнопка 'Так'");
+                glow.style.opacity = "1";
+                message.classList.remove('hidden');
+                setTimeout(() => message.style.opacity = "1", 500);
+
+                // Вібрація (працює тільки на мобільних)
+                if (navigator.vibrate) {
+                    navigator.vibrate([500, 300, 500]);
+                }
+            });
         });
     </script>
 </body>
