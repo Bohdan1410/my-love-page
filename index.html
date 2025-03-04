@@ -123,10 +123,11 @@
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
             const gifs = document.querySelectorAll('.gif');
+            const glow = document.querySelectorAll('.glow');
             const photo = document.getElementById('ourPhoto');
             const body = document.body;
 
-            if (!noBtn || !yesBtn || !message || !gifs || !photo) {
+            if (!noBtn || !yesBtn || !message || !gifs || !photo || !glow) {
                 console.error("Один із елементів не знайдено!");
                 return;
             }
