@@ -11,23 +11,29 @@
             background-color: #222;
             color: white;
             overflow: hidden;
-            transition: background-color 2s ease-in-out;
+        }
+
+        /* Віньєтка */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(34, 34, 34, 0) 0%, rgba(34, 34, 34, 1) 80%);
+            transition: background 2s ease-in-out;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .glow {
-    animation: vignette 2s ease-in-out forwards;
-}
+            background: radial-gradient(circle, rgba(255, 77, 109, 0.7) 0%, rgba(34, 34, 34, 1) 80%) !important;
+        }
 
-@keyframes vignette {
-    0% {
-        background: radial-gradient(circle at center, rgba(255, 77, 109, 0) 0%, #222 80%);
-    }
-    100% {
-        background: radial-gradient(circle at center, rgba(255, 77, 109, 0.6) 30%, #222 100%);
-    }
-}
         .container {
             margin-top: 10vh;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -56,7 +62,7 @@
         }
 
         #no {
-            background-color: #888; /* Світліший сірий */
+            background-color: #888;
             color: white;
             position: absolute;
             z-index: 10000;
@@ -67,7 +73,7 @@
         }
 
         .message {
-            margin-top:15px;
+            margin-top: 15px;
             font-size: 25px;
             font-weight: bold;
             opacity: 0;
@@ -86,7 +92,7 @@
             display: none;
             width: 70%;
             max-width: 300px;
-            margin-top: 10px;
+            margin-top: 20px;
             border-radius: 10px;
             position: absolute;
             bottom: 5vh;
@@ -97,6 +103,8 @@
 </head>
 <body>
 
+    <div class="vignette"></div>  <!-- Додаємо віньєтку -->
+
     <div class="container">
         <h1>Хочеш знати, що я робив би, якби був поруч просто зараз?</h1>
         
@@ -106,14 +114,16 @@
         </div>
 
         <p class="message hidden">Якби я був поруч, я б обіймав тебе так міцно, щоб ти відчула всю мою любов…
-Я б не відпустив тебе ні на мить, тримаючи у своїх обіймах дорогу мені людину у світі🫂🥺
-Ти – моє сонечко, моє тепло, моя ніжність. Твоя усмішка – це найкраще, що я бачив👄
-а твій голос – наймиліша мелодія для мене😍🥰
-Кохаю тебе безмежно, більше, ніж можу висловити словами ❤️</p>
+            Я б не відпустив тебе ні на мить, тримаючи у своїх обіймах дорогу мені людину у світі🫂🥺
+            Ти – моє сонечко, моє тепло, моя ніжність. Твоя усмішка – це найкраще, що я бачив👄
+            а твій голос – наймиліша мелодія для мене😍🥰
+            Кохаю тебе безмежно, більше, ніж можу висловити словами ❤️
+        </p>
 
         <img id="ourPhoto" src="https://github.com/Bohdan1410/my-love-page/blob/main/photo_5348231416468600861_y.jpg?raw=true" alt="Наше фото" class="photo">
 
     </div>
+
     <img src="https://github.com/Bohdan1410/my-love-page/blob/main/5.gif?raw=true" class="gif" style="top: 30%; left: 50%;">
     <img src="https://github.com/Bohdan1410/my-love-page/blob/main/4.gif?raw=true" class="gif" style="top: 10%; left: 5%;">
     <img src="https://github.com/Bohdan1410/my-love-page/blob/main/3.gif?raw=true" class="gif" style="top: 55%; left: 15%;">
@@ -129,11 +139,7 @@
             const message = document.querySelector('.message');
             const gifs = document.querySelectorAll('.gif');
             const photo = document.getElementById('ourPhoto');
-            const body = document.body;
-
-            if (!noBtn || !yesBtn || !message || !gifs || !photo) {
-                console.error("Один із елементів не знайдено!"); return;
-            }console.log("Кнопки завантажені коректно.");
+            const vignette = document.querySelector('.vignette');
 
             noBtn.addEventListener('mouseover', () => {
                 const x = Math.random() * (window.innerWidth - 100);
@@ -146,10 +152,9 @@
                 console.log("Кнопка 'Так' натиснута!");
 
                 setTimeout(() => {
-                    body.classList.add("glow");
-                }, 2000);
+                    vignette.classList.add("glow");
+                }, 500);
 
-                // Приховуємо обидві кнопки
                 yesBtn.style.display = "none";
                 noBtn.style.display = "none";
                 
@@ -166,4 +171,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
