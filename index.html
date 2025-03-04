@@ -3,108 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сюрприз для тебе</title>
+    <title>Якби я був поруч...</title>
     <style>
         body {
-            background-color: #1e1e1e;
-            color: white;
-            text-align: center;
             font-family: Arial, sans-serif;
-            padding: 20px;
-            position: relative;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .button {
-            background-color: #ff4081;
+            text-align: center;
+            background-color: #222;
             color: white;
-            border: none;
-            padding: 10px 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            margin-top: 20vh;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
             font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
             cursor: pointer;
+            transition: 0.3s;
             border-radius: 5px;
-            margin-top: 20px;
         }
-        .gif-container {
+
+        #yes {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 9999;
             position: relative;
-            width: 100%;
-            height: 250px;
-            margin-top: 20px;
         }
-        .gif {
-            width: 80px;
+
+        #no {
+            background-color: #666;
+            color: white;
             position: absolute;
         }
+
+        .glow {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255,150,100,0.3) 0%, rgba(0,0,0,0) 80%);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
         .hidden {
             display: none;
         }
-        .photo {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
-            margin-top: 20px;
+
+        .message {
+            font-size: 22px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
-        .button-no {
-            background-color: #888;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
+
+        .gif {
             position: absolute;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            z-index: 1;
+            animation: gif-move 5s infinite;
         }
+
+        @keyframes gif-move {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -100px); }
+            50% { transform: translate(-150px, 150px); }
+            75% { transform: translate(200px, -50px); }
+            100% { transform: translate(-50px, 200px); }
+        }
+
     </style>
 </head>
 <body>
+    <div class="glow"></div>
+    
     <div class="container">
-        <h2>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h2>
-        <button class="button" id="yesBtn">Так</button>
-        <button class="button-no" id="noBtn">Ні</button>
-        <div class="gif-container" id="gifContainer">
-            <img src="gif1.gif" class="gif" style="top: 20px; left: 30px;">
-            <img src="gif2.gif" class="gif" style="top: 100px; right: 20px;">
-            <img src="gif3.gif" class="gif" style="bottom: 40px; left: 80px;">
-            <img src="gif4.gif" class="gif" style="bottom: 10px; right: 50px;">
+        <h1>Хочеш знати, що б я зробив, якби був поруч просто зараз?</h1>
+        
+        <div class="buttons">
+            <button id="yes">Так</button>
+            <button id="no">Ні</button>
         </div>
-        <p id="loveText" class="hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше ні за що не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
-        <img src="photo.jpg" class="photo hidden" id="photo">
+
+        <p class="message hidden">...Я б просто обійняв тебе... Довго-довго... І більше ніколи не відпускав ❤️</p>
     </div>
 
+    <!-- Гіфки -->
+    <img src="https://media.giphy.com/media/8W5C7R1bXlfmI/giphy.gif" class="gif" style="top: 30%; left: 20%;">
+    <img src="https://media.giphy.com/media/5xaOcLVlzXjj9K6G9m/giphy.gif" class="gif" style="top: 50%; left: 40%;">
+    <img src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif" class="gif" style="top: 70%; left: 60%;">
+    <img src="https://media.giphy.com/media/3o7aD2saE0VqR9jlTU/giphy.gif" class="gif" style="top: 10%; left: 80%;">
+
     <script>
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
-        const gifContainer = document.getElementById("gifContainer");
-        const loveText = document.getElementById("loveText");
-        const photo = document.getElementById("photo");
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("JavaScript завантажено!");
 
-        let moveCount = 0;
-        
-        noBtn.addEventListener("click", function() {
-            moveCount++;
-            if (moveCount > 5) {
-                noBtn.style.display = "none"; // Зникає після 5 натискань
-            } else {
-                const randomX = Math.floor(Math.random() * 200 - 100);
-                const randomY = Math.floor(Math.random() * 200 - 100);
-                noBtn.style.transform = translate(${randomX}px, ${randomY}px);
+            const noBtn = document.getElementById('no');
+            const yesBtn = document.getElementById('yes');
+            const message = document.querySelector('.message');
+            const glow = document.querySelector('.glow');
+
+            if (!noBtn || !yesBtn || !message || !glow) {
+                console.error("Один із елементів не знайдено!");
+                return;
             }
-        });
 
-        yesBtn.addEventListener("click", function() {
-            gifContainer.classList.add("hidden");
-            loveText.classList.remove("hidden");
-            photo.classList.remove("hidden");
-            noBtn.style.display = "none";
+            console.log("Кнопки завантажені коректно.");
 
-            // Додаємо більше вібрацій
-            if (navigator.vibrate) {
-                navigator.vibrate([300, 300, 300, 600]);
-            }
+            // Переміщення кнопки "Ні"
+            noBtn.addEventListener('mouseover', () => {
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
+            });
+
+            // Відображення повідомлення (переконливо працює)
+            yesBtn.addEventListener("click", function() {console.log("Кнопка 'Так' натиснута!");
+                glow.style.opacity = "1";
+                message.classList.remove('hidden');
+                setTimeout(() => message.style.opacity = "1", 500);
+
+                // Вібрація (тільки для мобільних)
+                if (navigator.vibrate) {
+                    navigator.vibrate([500, 300, 500]);
+                }
+            });
         });
     </script>
 </body>
