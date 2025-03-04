@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Якби я був поруч...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #222;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            margin-top: 20vh;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        #yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #no {
+            background-color: #666;
+            color: white;
+            position: absolute;
+        }
+
+        .glow {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255,150,100,0.3) 0%, rgba(0,0,0,0) 80%);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message {
+            font-size: 22px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    
+    <div class="container">
+        <h1>Хочеш знати, що б я зробив, якби був поруч просто зараз?</h1>
+        
+        <div class="buttons">
+            <button id="yes">Так</button>
+            <button id="no">Ні</button>
+        </div>
+
+        <p class="message hidden">...Я б просто обійняв тебе... Довго-довго... І більше ніколи не відпускав ❤️</p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no');
+        const yesBtn = document.getElementById('yes');
+        const message = document.querySelector('.message');
+        const glow = document.querySelector('.glow');
+
+        // Функція для втечі кнопки "Ні"
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = ${x}px;
+            noBtn.style.top = ${y}px;
+        });
+
+        // Функція для показу повідомлення
+        yesBtn.addEventListener('click', () => {
+            glow.style.opacity = "1";
+            message.classList.remove('hidden');
+            setTimeout(() => message.style.opacity = "1", 500);
+
+            // Вібрація (тільки на мобільних пристроях)
+            if (navigator.vibrate) {
+                navigator.vibrate([500, 300, 500]); // Вібрація двічі
+            }
+        });
+    </script>
+</body>
+</html>
