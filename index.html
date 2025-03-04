@@ -15,15 +15,17 @@
         }
 
         .glow {
-            background-color: #ff4d6d !important; /* Колір, який використовував раніше */
+            background-color: #ff4d6d !important; /* Колір, який ти вже використовував */
         }
 
         .container {
-            margin-top: 20vh;
+            position: relative;
+            top: 10vh; /* Піднімаємо текст вище */
         }
 
         h1 {
             font-size: 24px;
+            margin-bottom: 20px;
         }
 
         .buttons {
@@ -51,7 +53,7 @@
             background-color: #666;
             color: white;
             position: absolute;
-            z-index: 10000;
+            z-index: 10000; /* Щоб кнопка завжди була поверх гіфок */
         }
 
         .hidden {
@@ -65,26 +67,17 @@
             transition: opacity 1.5s ease-in-out;
         }
 
-        /* Гіфки в хаотичних місцях */
-        .gif {
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        /* Спільне фото (по центру) */
         .photo {
             display: none;
             width: 80%;
-            max-width: 400px;
+            max-width: 350px; /* Трохи менший розмір */
             margin-top: 20px;
             border-radius: 10px;
             position: absolute;
-            top: 50%;
+            bottom: 10px; /* Мінімальний відступ знизу */
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -100,16 +93,10 @@
 
         <p class="message hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше нізащо не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
 
-        <!-- Спільне фото -->
+        <!-- Фото -->
         <img id="ourPhoto" src="https://github.com/Bohdan1410/my-love-page/blob/main/photo_5348231416468600861_y.jpg?raw=true" alt="Наше фото" class="photo">
 
     </div>
-
-    <!-- Гіфки -->
-    <img src="https://i.pinimg.com/originals/42/9a/89/429a890a39e70d522d52c7e52bce8535.gif" class="gif" style="top: 10%; left: 5%;">
-    <img src="https://media.giphy.com/media/5xaOcLVlzXjj9K6G9m/giphy.gif" class="gif" style="top: 50%; left: 40%;">
-    <img src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif" class="gif" style="top: 70%; left: 60%;">
-    <img src="https://media.giphy.com/media/3o7aD2saE0VqR9jlTU/giphy.gif" class="gif" style="top: 30%; left: 80%;">
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -118,16 +105,8 @@
             const noBtn = document.getElementById('no');
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
-            const gifs = document.querySelectorAll('.gif');
             const photo = document.getElementById('ourPhoto');
             const body = document.body;
-
-            if (!noBtn || !yesBtn || !message || !gifs || !photo) {
-                console.error("Один із елементів не знайдено!");
-                return;
-            }
-
-            console.log("Кнопки завантажені коректно.");
 
             // Переміщення кнопки "Ні"
             noBtn.addEventListener('mouseover', () => {
@@ -141,22 +120,22 @@
             yesBtn.addEventListener("click", function() {
                 console.log("Кнопка 'Так' натиснута!");
 
-                // Плавна зміна фону через 2 секунди
+                // Через 2 секунди змінюємо фон
                 setTimeout(() => {
                     body.classList.add("glow");
                 }, 2000);
 
-                // Приховуємо кнопку "Ні" і гіфки
+                // Приховуємо кнопку "Ні"
                 noBtn.style.display = "none";
-                gifs.forEach(gif => gif.style.display = "none");
 
-                // Відображаємо текст і фото
+                // Відображаємо текст
                 message.classList.remove('hidden');
                 setTimeout(() => message.style.opacity = "1", 500);
-                setTimeout(() => photo.style.display = "block", 500); // Затримка перед показом фото
 
-                // Вібрація (тільки для мобільних)
-                if (navigator.vibrate) {
+                // Відображаємо фото
+                photo.style.display = "block";
+
+                // Вібрація (тільки для мобільних)if (navigator.vibrate) {
                     navigator.vibrate([500, 300, 500]);
                 }
             });
