@@ -48,17 +48,6 @@
             position: absolute;
         }
 
-        .glow {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            background: radial-gradient(circle, rgba(255,150,100,0.3) 0%, rgba(0,0,0,0) 80%);
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
-
         .hidden {
             display: none;
         }
@@ -70,28 +59,27 @@
             transition: opacity 1.5s ease-in-out;
         }
 
+        /* Гіфки в хаотичних місцях */
         .gif {
             position: absolute;
             width: 100px;
             height: 100px;
             object-fit: cover;
             z-index: 1;
-            animation: gif-move 5s infinite;
         }
 
-        @keyframes gif-move {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(100px, -100px); }
-            50% { transform: translate(-150px, 150px); }
-            75% { transform: translate(200px, -50px); }
-            100% { transform: translate(-50px, 200px); }
+        /* Спільне фото */
+        .photo {
+            display: none;
+            width: 80%;
+            max-width: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
         }
-
     </style>
 </head>
 <body>
-    <div class="glow"></div>
-    
+
     <div class="container">
         <h1>Хочеш знати, що б я зробив, якби був поруч просто зараз?</h1>
         
@@ -101,13 +89,17 @@
         </div>
 
         <p class="message hidden">...Я б просто обійняв тебе... Довго-довго... І більше ніколи не відпускав ❤️</p>
+
+        <!-- Спільне фото -->
+        <img id="ourPhoto" src="ВАШЕ_ФОТО.jpg" alt="Наше фото" class="photo">
+
     </div>
 
     <!-- Гіфки -->
-    <img src="https://media.giphy.com/media/8W5C7R1bXlfmI/giphy.gif" class="gif" style="top: 30%; left: 20%;">
+    <img src="https://media.giphy.com/media/8W5C7R1bXlfmI/giphy.gif" class="gif" style="top: 20%; left: 10%;">
     <img src="https://media.giphy.com/media/5xaOcLVlzXjj9K6G9m/giphy.gif" class="gif" style="top: 50%; left: 40%;">
     <img src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif" class="gif" style="top: 70%; left: 60%;">
-    <img src="https://media.giphy.com/media/3o7aD2saE0VqR9jlTU/giphy.gif" class="gif" style="top: 10%; left: 80%;">
+    <img src="https://media.giphy.com/media/3o7aD2saE0VqR9jlTU/giphy.gif" class="gif" style="top: 30%; left: 80%;">
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -116,9 +108,10 @@
             const noBtn = document.getElementById('no');
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
-            const glow = document.querySelector('.glow');
+            const gifs = document.querySelectorAll('.gif');
+            const photo = document.getElementById('ourPhoto');
 
-            if (!noBtn || !yesBtn || !message || !glow) {
+            if (!noBtn || !yesBtn || !message || !gifs  || !photo) {
                 console.error("Один із елементів не знайдено!");
                 return;
             }
@@ -133,11 +126,18 @@
                 noBtn.style.top = y + "px";
             });
 
-            // Відображення повідомлення (переконливо працює)
-            yesBtn.addEventListener("click", function() {console.log("Кнопка 'Так' натиснута!");
-                glow.style.opacity = "1";
+            // Дії після натискання "Так"
+            yesBtn.addEventListener("click", function() {
+                console.log("Кнопка 'Так' натиснута!");
+
+                // Приховуємо кнопку "Ні" і гіфки
+                noBtn.style.display = "none";
+                gifs.forEach(gif => gif.style.display = "none");
+
+                // Відображаємо текст і фото
                 message.classList.remove('hidden');
                 setTimeout(() => message.style.opacity = "1", 500);
+                photo.style.display = "block";
 
                 // Вібрація (тільки для мобільних)
                 if (navigator.vibrate) {
