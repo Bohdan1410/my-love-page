@@ -37,11 +37,6 @@
         .gif {
             width: 80px;
             position: absolute;
-            animation: float 2s infinite alternate ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
         }
         .hidden {
             display: none;
@@ -71,10 +66,10 @@
         <button class="button" id="yesBtn">Так</button>
         <button class="button-no" id="noBtn">Ні</button>
         <div class="gif-container" id="gifContainer">
-            <img src="gif1.gif" class="gif" style="top: 10px; left: 10px;">
-            <img src="gif2.gif" class="gif" style="top: 50px; right: 20px;">
-            <img src="gif3.gif" class="gif" style="bottom: 30px; left: 50px;">
-            <img src="gif4.gif" class="gif" style="bottom: 10px; right: 10px;">
+            <img src="gif1.gif" class="gif" style="top: 20px; left: 30px;">
+            <img src="gif2.gif" class="gif" style="top: 100px; right: 20px;">
+            <img src="gif3.gif" class="gif" style="bottom: 40px; left: 80px;">
+            <img src="gif4.gif" class="gif" style="bottom: 10px; right: 50px;">
         </div>
         <p id="loveText" class="hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше ні за що не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
         <img src="photo.jpg" class="photo hidden" id="photo">
@@ -87,13 +82,17 @@
         const loveText = document.getElementById("loveText");
         const photo = document.getElementById("photo");
 
-        let clickCount = 0;
-
+        let moveCount = 0;
+        
         noBtn.addEventListener("click", function() {
-            clickCount++;
-            const randomX = Math.floor(Math.random() * window.innerWidth * 0.6);
-            const randomY = Math.floor(Math.random() * window.innerHeight * 0.6);
-            noBtn.style.transform = translate(${randomX}px, ${randomY}px);
+            moveCount++;
+            if (moveCount > 5) {
+                noBtn.style.display = "none"; // Зникає після 5 натискань
+            } else {
+                const randomX = Math.floor(Math.random() * 200 - 100);
+                const randomY = Math.floor(Math.random() * 200 - 100);
+                noBtn.style.transform = translate(${randomX}px, ${randomY}px);
+            }
         });
 
         yesBtn.addEventListener("click", function() {
@@ -102,9 +101,9 @@
             photo.classList.remove("hidden");
             noBtn.style.display = "none";
 
-            // Додаємо вібрації
+            // Додаємо більше вібрацій
             if (navigator.vibrate) {
-                navigator.vibrate([500, 300, 500, 300, 1000]);
+                navigator.vibrate([300, 300, 300, 600]);
             }
         });
     </script>
