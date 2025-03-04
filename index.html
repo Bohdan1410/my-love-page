@@ -11,6 +11,7 @@
             background-color: #222;
             color: white;
             overflow: hidden;
+            position: relative;
         }
 
         .container {
@@ -19,16 +20,6 @@
 
         h1 {
             font-size: 24px;
-        }
-
-        .gif-container {
-            margin-top: 90px;
-            margin-left: 40px;
-        }
-
-        .gif-container img {
-            width: 150px;
-            height: auto;
         }
 
         .buttons {
@@ -50,7 +41,7 @@
         #yes {
             background-color: #ff4d6d;
             color: white;
-            z-index: 9999;
+            z-index: 10;
             position: relative;
         }
 
@@ -58,8 +49,6 @@
             background-color: #666;
             color: white;
             position: absolute;
-            left: 60%;
-            top: 0;
         }
 
         .glow {
@@ -84,27 +73,39 @@
             transition: opacity 1.5s ease-in-out;
         }
 
-        .photo {
-            margin-top: 20px;
-            display: none;
+        .gif {
+            position: fixed;
+            width: 100px;
+            height: 100px;
         }
 
-        .photo img {
-            width: 250px;
-            height: auto;
+        .gif.left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .gif.right {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .photo {
+            display: none;
+            width: 90vw;
+            max-width: 400px;
+            margin: 20px auto;
             border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <div class="glow"></div>
-    
+
     <div class="container">
         <h1>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h1>
-        
-        <div class="gif-container">
-            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgifer.com%2Fen%2FYAg6&psig=AOvVaw3bwIJAWienu-aMRKMMUyn3&ust=1741194468795000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCLjy1Yf18IsDFQAAAAAdAAAAABAE" alt="Мила GIF-анімація">
-        </div>
+
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGZrMHR6Z3gyb2s5aTg0MHBzbXUwbW50M3BoMWdtanhrdXkyZ3pjYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5bdhqXjm2cZxk/giphy.gif" class="gif left">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGZrMHR6Z3gyb2s5aTg0MHBzbXUwbW50M3BoMWdtanhrdXkyZ3pjYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5bdhqXjm2cZxk/giphy.gif" class="gif right">
 
         <div class="buttons">
             <button id="yes">Так</button>
@@ -113,9 +114,7 @@
 
         <p class="message hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше нізащо не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
 
-        <div class="photo">
-            <img src="your-photo.jpg" alt="Наша спільна фотографія">
-        </div>
+        <img src="YOUR_IMAGE_URL_HERE" class="photo" id="photo">
     </div>
 
     <script>
@@ -126,7 +125,8 @@
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
             const glow = document.querySelector('.glow');
-            const photo = document.querySelector('.photo');
+            const gifs = document.querySelectorAll('.gif');
+            const photo = document.getElementById('photo');
 
             if (!noBtn || !yesBtn || !message || !glow || !photo) {
                 console.error("Один із елементів не знайдено!");
@@ -135,28 +135,33 @@
 
             console.log("Кнопки завантажені коректно.");
 
-            // Переміщення кнопки "Ні" без обмежень
+            // Переміщення кнопки "Ні"
             noBtn.addEventListener('mouseover', () => {
                 const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
                 const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
-                noBtn.style.left = `${x}px`;
-                noBtn.style.top = `${y}px`;
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
             });
 
-            // Відображення повідомлення, фото та зникнення кнопки "Ні"
+            // Відображення повідомлення, зникнення кнопки "Ні" та гіфок
             yesBtn.addEventListener("click", function() {
                 console.log("Кнопка 'Так' натиснута!");
                 glow.style.opacity = "1";
                 message.classList.remove('hidden');
                 setTimeout(() => message.style.opacity = "1", 500);
-                photo.style.display = "block";
 
-                // Ховаємо кнопку "Ні"
+                // Ховаємо кнопку "Ні" та гіфки
                 noBtn.style.display = "none";
+                gifs.forEach(gif => gif.style.display = "none");
 
-                // Вібрація (тільки для мобільних)
+                // Показуємо фото
+                setTimeout(() => {
+                    photo.style.display = "block";
+                }, 1000);
+
+                // Вібрація
                 if (navigator.vibrate) {
-                    navigator.vibrate([500, 300, 500]);
+                    navigator.vibrate([300, 200, 300, 200, 300, 200, 300]);
                     console.log("Вібрація запущена!");
                 }
             });
