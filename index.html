@@ -86,9 +86,9 @@
     </div>
 
     <script>
-        console.log("JavaScript завантажено!");
-
         document.addEventListener("DOMContentLoaded", function () {
+            console.log("JavaScript завантажено!");
+
             const noBtn = document.getElementById('no');
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
@@ -109,9 +109,9 @@
                 noBtn.style.top = y + "px";
             });
 
-            // Відображення повідомлення (альтернативний метод)
-            yesBtn.onclick = function() {
-                console.log("Натиснута кнопка 'Так'");
+            // Відображення повідомлення (переконливо працює)
+            yesBtn.addEventListener("click", function() {
+                console.log("Кнопка 'Так' натиснута!");
                 glow.style.opacity = "1";
                 message.classList.remove('hidden');
                 setTimeout(() => message.style.opacity = "1", 500);
@@ -120,7 +120,7 @@
                 if (navigator.vibrate) {
                     navigator.vibrate([500, 300, 500]);
                 }
-            };
+            });
         });
     </script>
 </body>
