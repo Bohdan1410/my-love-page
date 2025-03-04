@@ -14,8 +14,12 @@
             transition: background 1s ease-in-out;
         }
 
+        .glow {
+            background: radial-gradient(circle, rgba(255,77,109,0.8) 10%, rgba(34,34,34,1) 70%);
+        }
+
         .container {
-            margin-top: 15vh;
+            margin-top: 20vh;
         }
 
         h1 {
@@ -55,7 +59,7 @@
         }
 
         .message {
-            font-size: 25px;
+            font-size: 22px;
             font-weight: bold;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
@@ -77,14 +81,13 @@
             max-width: 400px;
             margin-top: 20px;
             border-radius: 10px;
-            margin-left:50px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h1>
+       <h1>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h1>
         
         <div class="buttons">
             <button id="yes">Так</button>
@@ -115,7 +118,7 @@
             const photo = document.getElementById('ourPhoto');
             const body = document.body;
 
-            if (!noBtn || !yesBtn || !message || !gifs || !photo) {
+            if (!noBtn  !yesBtn  !message  !gifs  !photo) {
                 console.error("Один із елементів не знайдено!");
                 return;
             }
