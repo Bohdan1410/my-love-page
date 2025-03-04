@@ -15,8 +15,17 @@
         }
 
         .glow {
-            background-color: rgba(255, 77, 109, 0.7) !important; /* Менш насичений рожевий */
-        }
+    animation: vignette 2s ease-in-out forwards;
+}
+
+@keyframes vignette {
+    0% {
+        background: radial-gradient(circle at center, rgba(255, 77, 109, 0) 0%, #222 80%);
+    }
+    100% {
+        background: radial-gradient(circle at center, rgba(255, 77, 109, 0.6) 30%, #222 100%);
+    }
+}
 
         .container {
             margin-top: 10vh;
