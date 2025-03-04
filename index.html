@@ -21,6 +21,15 @@
             font-size: 24px;
         }
 
+        .gif-container {
+            margin-top: 20px;
+        }
+
+        .gif-container img {
+            width: 150px;
+            height: auto;
+        }
+
         .buttons {
             margin-top: 20px;
             position: relative;
@@ -48,7 +57,8 @@
             background-color: #666;
             color: white;
             position: absolute;
-            
+            left: 60%;
+            top: 0;
         }
 
         .glow {
@@ -72,6 +82,17 @@
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
+
+        .photo {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .photo img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -80,12 +101,20 @@
     <div class="container">
         <h1>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h1>
         
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif" alt="Мила GIF-анімація">
+        </div>
+
         <div class="buttons">
             <button id="yes">Так</button>
             <button id="no">Ні</button>
         </div>
 
         <p class="message hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше нізащо не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
+
+        <div class="photo">
+            <img src="your-photo.jpg" alt="Наша спільна фотографія">
+        </div>
     </div>
 
     <script>
@@ -96,8 +125,9 @@
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
             const glow = document.querySelector('.glow');
+            const photo = document.querySelector('.photo');
 
-            if (!noBtn || !yesBtn || !message || !glow) {
+            if (!noBtn || !yesBtn || !message || !glow || !photo) {
                 console.error("Один із елементів не знайдено!");
                 return;
             }
@@ -108,16 +138,17 @@
             noBtn.addEventListener('mouseover', () => {
                 const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
                 const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
-                noBtn.style.left = x + "px";
-                noBtn.style.top = y + "px";
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
             });
 
-            // Відображення повідомлення та зникнення кнопки "Ні"
+            // Відображення повідомлення, фото та зникнення кнопки "Ні"
             yesBtn.addEventListener("click", function() {
                 console.log("Кнопка 'Так' натиснута!");
                 glow.style.opacity = "1";
                 message.classList.remove('hidden');
                 setTimeout(() => message.style.opacity = "1", 500);
+                photo.style.display = "block";
 
                 // Ховаємо кнопку "Ні"
                 noBtn.style.display = "none";
