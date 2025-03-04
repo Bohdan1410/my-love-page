@@ -3,168 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Якби я був поруч...</title>
+    <title>Сюрприз для тебе</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
             text-align: center;
-            background-color: #222;
-            color: white;
-            overflow: hidden;
+            font-family: Arial, sans-serif;
+            padding: 20px;
             position: relative;
         }
-
         .container {
-            margin-top: 20vh;
-        }
-
-        h1 {
-            font-size: 24px;
-        }
-
-        .buttons {
-            margin-top: 20px;
+            max-width: 400px;
+            margin: 0 auto;
             position: relative;
-            height: 50px;
         }
-
-        button {
-            font-size: 18px;
-            padding: 10px 20px;
-            margin: 10px;
+        .button {
+            background-color: #ff4081;
+            color: white;
             border: none;
+            padding: 10px 20px;
+            font-size: 18px;
             cursor: pointer;
-            transition: 0.3s;
             border-radius: 5px;
+            margin-top: 20px;
         }
-
-        #yes {
-            background-color: #ff4d6d;
-            color: white;
-            z-index: 10;
+        .gif-container {
             position: relative;
+            width: 100%;
+            height: 250px;
+            margin-top: 20px;
         }
-
-        #no {
-            background-color: #666;
-            color: white;
+        .gif {
+            width: 80px;
             position: absolute;
+            animation: float 2s infinite alternate ease-in-out;
         }
-
-        .glow {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            background: radial-gradient(circle, rgba(255,150,100,0.3) 0%, rgba(0,0,0,0) 80%);
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
         }
-
         .hidden {
             display: none;
         }
-
-        .message {
-            font-size: 22px;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
-
-        .gif {
-            position: fixed;
-            width: 100px;
-            height: 100px;
-        }
-
-        .gif.left {
-            bottom: 20px;
-            left: 20px;
-        }
-
-        .gif.right {
-            bottom: 20px;
-            right: 20px;
-        }
-
         .photo {
-            display: none;
-            width: 90vw;
-            max-width: 400px;
-            margin: 20px auto;
+            width: 100%;
+            max-width: 300px;
             border-radius: 10px;
+            margin-top: 20px;
+        }
+        .button-no {
+            background-color: #888;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            position: absolute;
         }
     </style>
 </head>
 <body>
-    <div class="glow"></div>
-
     <div class="container">
-        <h1>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h1>
-
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGZrMHR6Z3gyb2s5aTg0MHBzbXUwbW50M3BoMWdtanhrdXkyZ3pjYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5bdhqXjm2cZxk/giphy.gif" class="gif left">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGZrMHR6Z3gyb2s5aTg0MHBzbXUwbW50M3BoMWdtanhrdXkyZ3pjYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5bdhqXjm2cZxk/giphy.gif" class="gif right">
-
-        <div class="buttons">
-            <button id="yes">Так</button>
-            <button id="no">Ні</button>
+        <h2>Хочеш знати, що я зробив би, якби був поруч просто зараз?</h2>
+        <button class="button" id="yesBtn">Так</button>
+        <button class="button-no" id="noBtn">Ні</button>
+        <div class="gif-container" id="gifContainer">
+            <img src="gif1.gif" class="gif" style="top: 10px; left: 10px;">
+            <img src="gif2.gif" class="gif" style="top: 50px; right: 20px;">
+            <img src="gif3.gif" class="gif" style="bottom: 30px; left: 50px;">
+            <img src="gif4.gif" class="gif" style="bottom: 10px; right: 10px;">
         </div>
-
-        <p class="message hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше нізащо не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
-
-        <img src="YOUR_IMAGE_URL_HERE" class="photo" id="photo">
+        <p id="loveText" class="hidden">Я б обійняв тебе міцно-міцно... Довго-довго... І більше ні за що не відпустив би. Ти сонечко, кохаю тебе ❤️</p>
+        <img src="photo.jpg" class="photo hidden" id="photo">
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log("JavaScript завантажено!");
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const gifContainer = document.getElementById("gifContainer");
+        const loveText = document.getElementById("loveText");
+        const photo = document.getElementById("photo");
 
-            const noBtn = document.getElementById('no');
-            const yesBtn = document.getElementById('yes');
-            const message = document.querySelector('.message');
-            const glow = document.querySelector('.glow');
-            const gifs = document.querySelectorAll('.gif');
-            const photo = document.getElementById('photo');
+        let clickCount = 0;
 
-            if (!noBtn || !yesBtn || !message || !glow || !photo) {
-                console.error("Один із елементів не знайдено!");
-                return;
+        noBtn.addEventListener("click", function() {
+            clickCount++;
+            const randomX = Math.floor(Math.random() * window.innerWidth * 0.6);
+            const randomY = Math.floor(Math.random() * window.innerHeight * 0.6);
+            noBtn.style.transform = translate(${randomX}px, ${randomY}px);
+        });
+
+        yesBtn.addEventListener("click", function() {
+            gifContainer.classList.add("hidden");
+            loveText.classList.remove("hidden");
+            photo.classList.remove("hidden");
+            noBtn.style.display = "none";
+
+            // Додаємо вібрації
+            if (navigator.vibrate) {
+                navigator.vibrate([500, 300, 500, 300, 1000]);
             }
-
-            console.log("Кнопки завантажені коректно.");
-
-            // Переміщення кнопки "Ні"
-            noBtn.addEventListener('mouseover', () => {
-                const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-                const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
-                noBtn.style.left = x + "px";
-                noBtn.style.top = y + "px";
-            });
-
-            // Відображення повідомлення, зникнення кнопки "Ні" та гіфок
-            yesBtn.addEventListener("click", function() {
-                console.log("Кнопка 'Так' натиснута!");
-                glow.style.opacity = "1";
-                message.classList.remove('hidden');
-                setTimeout(() => message.style.opacity = "1", 500);
-
-                // Ховаємо кнопку "Ні" та гіфки
-                noBtn.style.display = "none";
-                gifs.forEach(gif => gif.style.display = "none");
-
-                // Показуємо фото
-                setTimeout(() => {
-                    photo.style.display = "block";
-                }, 1000);
-
-                // Вібрація
-                if (navigator.vibrate) {
-                    navigator.vibrate([300, 200, 300, 200, 300, 200, 300]);
-                    console.log("Вібрація запущена!");
-                }
-            });
         });
     </script>
 </body>
