@@ -14,17 +14,6 @@
             transition: background 1s ease-in-out;
         }
 
-        .glow {
-            position: fixed;
-            width:100vw;
-            height:100vh;
-            top:0;
-            left:0;
-            background: radial-gradient(circle, rgba(255,150,100,0.3) 0%, rgba(0, 0, 0, 0) 80%);
-            opacity:0;
-            transition:opacity 1,5s ease-in-out;
-        }
-
         .container {
             margin-top: 15vh;
         }
@@ -123,11 +112,10 @@
             const yesBtn = document.getElementById('yes');
             const message = document.querySelector('.message');
             const gifs = document.querySelectorAll('.gif');
-            const glow = document.querySelectorAll('.glow');
             const photo = document.getElementById('ourPhoto');
             const body = document.body;
 
-            if (!noBtn || !yesBtn || !message || !gifs || !photo || !glow) {
+            if (!noBtn || !yesBtn || !message || !gifs || !photo) {
                 console.error("Один із елементів не знайдено!");
                 return;
             }
