@@ -15,11 +15,11 @@
         }
 
         .glow {
-            background-color: #ff4d6d !important;
+            background-color: rgba(255, 77, 109, 0.7) !important; /* Менш насичений рожевий */
         }
 
         .container {
-            margin-top: 10vh; /* Підняв текст вище */
+            margin-top: 10vh;
         }
 
         h1 {
@@ -48,7 +48,7 @@
         }
 
         #no {
-            background-color: #666;
+            background-color: #888; /* Світліший сірий */
             color: white;
             position: absolute;
             z-index: 10000;
@@ -67,7 +67,7 @@
 
         .gif {
             position: absolute;
-            width: 200px; /* Зменшив розмір */
+            width: 200px;
             height: 200px;
             object-fit: cover;
             z-index: 1;
@@ -75,12 +75,12 @@
 
         .photo {
             display: none;
-            width: 70%; /* Зменшив розмір */
+            width: 70%;
             max-width: 300px;
-            margin-top: 10px; /* Мінімальний відступ */
+            margin-top: 10px;
             border-radius: 10px;
             position: absolute;
-            bottom: 5vh; /* Опустив вниз */
+            bottom: 5vh;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -139,7 +139,10 @@
                     body.classList.add("glow");
                 }, 2000);
 
+                // Приховуємо обидві кнопки
+                yesBtn.style.display = "none";
                 noBtn.style.display = "none";
+                
                 gifs.forEach(gif => gif.style.display = "none");
 
                 message.classList.remove('hidden');
